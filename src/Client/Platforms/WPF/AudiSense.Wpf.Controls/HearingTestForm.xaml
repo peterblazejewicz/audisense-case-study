@@ -1,0 +1,53 @@
+<UserControl x:Class="AudiSense.Wpf.Controls.HearingTestForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="500">
+    
+    <Border Style="{StaticResource AudiSense.ElevatedCard}" MaxWidth="500">
+        <StackPanel>
+            <TextBlock Text="{Binding Title}" Style="{StaticResource AudiSense.HeaderText}"/>
+                        
+            <!-- Tester Name Field -->
+            <StackPanel Margin="0,0,0,24">
+                <TextBlock Text="Tester Name" Style="{StaticResource AudiSense.FieldLabel}"/>
+                <TextBox Text="{Binding TesterName, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource AudiSense.TextBox}" MaxLength="100"
+                         ToolTip="Enter the name of the person conducting the test (minimum 2 characters)"/>
+                <TextBlock Text="Minimum 2 characters required" 
+                           Style="{StaticResource AudiSense.HelperText}"/>
+            </StackPanel>
+                
+            <!-- Date Conducted Field -->
+            <StackPanel Margin="0,0,0,24">
+                <TextBlock Text="Date Conducted" Style="{StaticResource AudiSense.FieldLabel}"/>
+                <DatePicker SelectedDate="{Binding DateConducted}"
+                            Style="{StaticResource AudiSense.DatePicker}"/>
+            </StackPanel>
+                
+            <!-- Result Field -->
+            <StackPanel Margin="0,0,0,32">
+                <TextBlock Text="Test Results" Style="{StaticResource AudiSense.FieldLabel}"/>
+                <TextBox Text="{Binding Result, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource AudiSense.TextArea}" MaxLength="500" MinHeight="120"
+                         ToolTip="Enter detailed test results (minimum 5 characters)"/>
+                <TextBlock Text="Minimum 5 characters required • Maximum 500 characters" 
+                           Style="{StaticResource AudiSense.HelperText}"/>
+            </StackPanel>
+                
+            <!-- Action Buttons -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Cancel" 
+                        Command="{Binding CancelCommand}"
+                        Style="{StaticResource AudiSense.SecondaryButton}" 
+                        Margin="0,0,12,0" Width="100"/>
+                <Button Content="{Binding IsEditMode, Converter={StaticResource BoolToEditSaveTextConverter}}" 
+                        Command="{Binding SaveCommand}"
+                        Style="{StaticResource AudiSense.SuccessButton}" 
+                        Width="100"/>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</UserControl>
